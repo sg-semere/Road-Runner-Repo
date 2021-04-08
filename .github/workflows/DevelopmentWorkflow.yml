@@ -26,7 +26,25 @@ jobs:
       # Runs a single command using the runners shell
       - name: Run a one-line script
         run: echo Hello, world!
-
+        
+       
+      - name: Install git 
+        run: |
+         apt-get install -y git
+         git --version
+         echo "Path is ... $PATH"
+         PATH=$PATH:$(which git)
+         echo "Path is ... $PATH"
+         
+      - name: Git diff
+        env:
+          BRANCH: Development
+        run: |
+         echo "Branch is ... ${BRANCH}"
+         git diff --name-only "$GITHUB_BASE_REF..${BRANCH}"
+           
+      - name: Run Post-Processing Script
+        run: python3 Post-Processing.py 
       # Runs a set of commands using the runners shell
       - name: Run a multi-line script
         run: |
