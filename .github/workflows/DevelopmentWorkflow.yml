@@ -41,7 +41,7 @@ jobs:
           BRANCH: Development
         run: |
          echo Branch is ... ${BRANCH}
-         git diff-tree --nocommit-id --name-only -r ${{github.sha}}
+         git diff-tree -r --name-only ${{github.sha}}
            
 
       - name: Run a multi-line script
