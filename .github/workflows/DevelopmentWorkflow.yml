@@ -41,7 +41,7 @@ jobs:
           BRANCH: Development
         run: |
          echo Branch is ... ${BRANCH}
-         git diff -r --name-only $GITHUB_BASE_REF..${BRANCH}
+         git diff -r --name-only ${{github.sha}}
            
 
       - name: Run a multi-line script
