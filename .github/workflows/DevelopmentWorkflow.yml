@@ -6,23 +6,23 @@ on: repository_dispatch
 
 jobs:
 
-  server:
-    if: github.event.client_payload.job == 'server'
+  mule-4-exp-api:
+    if: github.event.client_payload.job == 'mule-4-prc-api'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
       - name: Build Server
-        working-directory: ./apps/server
-        run: ./gradlew clean build
+        working-directory: ./mule-4-exp-api
+        run: mvn clean install
 
-  client:
-      if: github.event.client_payload.job == 'client'
+  mule-4-prc-api:
+      if: github.event.client_payload.job == 'mule-4-prc-api'
       runs-on: ubuntu-latest
       steps:
         - uses: actions/checkout@master
         - name: Build Client
-          working-directory: ./apps/client
-          run: ./gradlew clean build
+          working-directory: ./mule-4-prc-api
+          run: mvn clean install 
 # Controls when the action will run. 
 # on:
 #   # Triggers the workflow on push or pull request events but only for the master branch
