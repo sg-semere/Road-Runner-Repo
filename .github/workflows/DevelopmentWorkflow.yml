@@ -51,12 +51,6 @@ jobs:
          PATH=$PATH:$(which git)
          echo "Path is ... $PATH"
          
-      - name: Git diff
-        env:
-          BRANCH: Development
-        run: |
-         echo Branch is ... ${BRANCH}
-         git show --name-status ${{github.sha}} 
            
 
       - name: Run a multi-line script
