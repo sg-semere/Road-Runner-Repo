@@ -2,64 +2,87 @@
 
 name: CI
 
-# Controls when the action will run. 
-on:
-  # Triggers the workflow on push or pull request events but only for the master branch
-  pull_request:
-    branches: [ Development ]
-    types: [ closed ]
+on: repository_dispatch
 
-  # Allows you to run this workflow manually from the Actions tab
-  
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
-  build:
-    # The type of runner that the job will run on
-    runs-on: ubuntu-latest
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
+  server:
+    if: github.event.client_payload.job == 'server'
+    runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@master
+      - name: Build Server
+        working-directory: ./apps/server
+        run: ./gradlew clean build
+
+  client:
+      if: github.event.client_payload.job == 'client'
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@master
+        - name: Build Client
+          working-directory: ./apps/client
+          run: ./gradlew clean build
+# Controls when the action will run. 
+# on:
+#   # Triggers the workflow on push or pull request events but only for the master branch
+#   pull_request:
+#     branches: [ Development ]
+#     types: [ closed ]
+
+
+
+#   # Allows you to run this workflow manually from the Actions tab
+  
+# # A workflow run is made up of one or more jobs that can run sequentially or in parallel
+# jobs:
+#   # This workflow contains a single job called "build"
+#   build:
+#     # The type of runner that the job will run on
+#     runs-on: ubuntu-latest
+
+#     # Steps represent a sequence of tasks that will be executed as part of the job
+#     steps:
     
       
        
  
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
+#       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+#       - uses: actions/checkout@v2
 
       
-      - id: file_changes
-        uses: trilom/file-changes-action@v1.2.3
-        with:
-         output: ' '
-      - name: list
-        run: |
-          echo '${{ steps.file_changes.outputs.files}}'
+#       - id: file_changes
+#         uses: trilom/file-changes-action@v1.2.3
+#         with:
+#          output: ' '
+#       - name: list
+#         run: |
+#           echo '${{ steps.file_changes.outputs.files}}'
     
-      - name: check
-        env:
-           Experience: ${{contains(steps.file_changes.outputs.files, 'exp')}}
-           Process: ${{contains(steps.file_changes.outputs.files, 'prc')}}
-        run: |
-         echo " Change in Experience API $Experience"
-         echo " Change in Process API $Process"
+#       - name: check
+#         env:
+#            Experience: ${{contains(steps.file_changes.outputs.files, 'exp')}}
+#            Process: ${{contains(steps.file_changes.outputs.files, 'prc')}}
+#         run: |
+#          echo " Change in Experience API $Experience"
+#          echo " Change in Process API $Process"
       
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo Hello, world!
+#       # Runs a single command using the runners shell
+#       - name: Run a one-line script
+#         run: echo Hello, world!
         
        
-      - name: Install git 
-        run: |
-         sudo apt-get install -y git
-         git --version
-         echo "Path is ... $PATH"
-         PATH=$PATH:$(which git)
-         echo "Path is ... $PATH"
+#       - name: Install git 
+#         run: |
+#          sudo apt-get install -y git
+#          git --version
+#          echo "Path is ... $PATH"
+#          PATH=$PATH:$(which git)
+#          echo "Path is ... $PATH"
          
            
 
-      - name: Run a multi-line script
-        run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
+#       - name: Run a multi-line script
+#         run: |
+#           echo Add other actions to build,
+#           echo test, and deploy your project.
