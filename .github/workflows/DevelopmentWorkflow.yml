@@ -32,6 +32,7 @@ jobs:
       - name: test
         run: |
           echo '${{ steps.file_changes.outputs.files}}'|grep 'exp'|echo $?
+          echo '${{ steps.file_changes.outputs.files}}'|grep 'prc'|echo $?
 
 
 
