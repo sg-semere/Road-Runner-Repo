@@ -41,7 +41,7 @@ jobs:
           BRANCH: Development
         run: |
          echo Branch is ... ${BRANCH}
-         git show ${{github.sha}} 
+         git show --name-status --oneline ${{github.sha}} 
            
 
       - name: Run a multi-line script
