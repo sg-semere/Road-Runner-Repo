@@ -21,7 +21,8 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
     
- 
+      
+       
  
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
@@ -30,13 +31,19 @@ jobs:
       - id: file_changes
         uses: trilom/file-changes-action@v1.2.3
         with:
-         output: '\r\n'
-      - name: test
+         output: ' '
+      - name: list
         run: |
-          echo '${{ steps.file_changes.outputs.files}}'|awk -F'/' '{print $1}'
           echo '${{ steps.file_changes.outputs.files}}'
-
-
+    
+      - name: check
+        env:
+           Experience: ${{contains(steps.file_changes.outputs.files, 'exp')}}
+           Process: ${{contains(steps.file_changes.outputs.files, 'prc')}}
+        run: |
+         echo " Change in Experience API $Experience"
+         echo " Change in Process API $Process"
+      
       # Runs a single command using the runners shell
       - name: Run a one-line script
         run: echo Hello, world!
