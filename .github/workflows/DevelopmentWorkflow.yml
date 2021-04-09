@@ -31,6 +31,7 @@ jobs:
         uses: trilom/file-changes-action@v1.2.3
       - name: test
         run: |
+          grep 'exp' ${{ steps.file_changes.outputs.files}}
           echo '${{ steps.file_changes.outputs.files}}'|awk -F'/' '{print $1}'|awk '{print substr($1,3)}'
 
  
