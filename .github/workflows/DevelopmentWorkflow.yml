@@ -29,10 +29,12 @@ jobs:
       
       - id: file_changes
         uses: trilom/file-changes-action@v1.2.3
+        with:
+         output: '\r\n'
       - name: test
         run: |
-          echo '${{ steps.file_changes.outputs.files}}'|awk -F, '{ for (i = 1; i < NF; ++i ) print $i} '
- 
+          echo '${{ steps.file_changes.outputs.files}}'|awk -F'/' '{print $1}'
+          echo '${{ steps.file_changes.outputs.files}}'
 
 
       # Runs a single command using the runners shell
@@ -48,12 +50,6 @@ jobs:
          PATH=$PATH:$(which git)
          echo "Path is ... $PATH"
          
-      - name: Git diff
-        env:
-          BRANCH: Development
-        run: |
-         echo Branch is ... ${BRANCH}
-         git show --name-status ${{github.sha}} 
            
 
       - name: Run a multi-line script
