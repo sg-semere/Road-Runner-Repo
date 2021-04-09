@@ -35,7 +35,7 @@ jobs:
         run: |
           echo '${{ steps.file_changes.outputs.files}}'|awk -F'/' '{print $1}'
           echo '${{ steps.file_changes.outputs.files}}'
-          test "${'${{ steps.file_changes.outputs.files}}'#*$'exp'}" != "$'${{ steps.file_changes.outputs.files}}'" && echo "$word found in $string"
+          test "${${{ steps.file_changes.outputs.files}}#*$'exp'}" != "${{ steps.file_changes.outputs.files}}" && echo "exp found in '${{ steps.file_changes.outputs.files}}'"
 
 
       # Runs a single command using the runners shell
