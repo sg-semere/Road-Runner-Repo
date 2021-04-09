@@ -31,8 +31,8 @@ jobs:
         uses: trilom/file-changes-action@v1.2.3
       - name: test
         run: |
-          echo '${{ steps.file_changes.outputs.files}}'|grep 'exp'|echo "Changes in Expereince API"
-          echo '${{ steps.file_changes.outputs.files}}'|grep 'prc'|echo "Changes in Process API"
+          echo '${{ steps.file_changes.outputs.files}}'|grep 'exp'
+          echo '${{ steps.file_changes.outputs.files}}'|grep 'prc'
 
 
  
