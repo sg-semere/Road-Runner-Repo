@@ -41,7 +41,7 @@ jobs:
           BRANCH: Development
         run: |
          echo Branch is ... ${BRANCH}
-         git diff-tree --name-only --diff-filter=ACMRT ${{github.event.pull_request.base.sha}} ${{github.sha}} 
+         git show ${{github.sha}} 
            
 
       - name: Run a multi-line script
