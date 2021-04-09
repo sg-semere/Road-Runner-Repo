@@ -30,7 +30,7 @@ jobs:
       - id: file_changes
         uses: trilom/file-changes-action@v1.2.3
         with:
-         output: '\r\n'
+         output: ' '
       - name: test
         run: |
           echo '${{ steps.file_changes.outputs.files}}'|awk -F'/' '{print $1}'
