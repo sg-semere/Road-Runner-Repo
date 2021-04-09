@@ -39,7 +39,7 @@ jobs:
     
       - name: check
         env:
-           Experience: contains(${{ steps.file_changes.outputs.files}}, 'exp')
+           Experience: ${{contains(${{ steps.file_changes.outputs.files}}, 'exp')}}
         run: echo "$Experience"
       
       # Runs a single command using the runners shell
