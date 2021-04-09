@@ -31,8 +31,8 @@ jobs:
         uses: trilom/file-changes-action@v1.2.3
       - name: test
         run: |
-          echo '${{ steps.file_changes.outputs.files}}'|grep 'exp'|awk -F'/' '{print $1}
-          echo '${{ steps.file_changes.outputs.files}}'|grep 'prc'|awk -F'/' '{print $1}
+          echo '${{ steps.file_changes.outputs.files}}'|grep 'exp'|awk -F'/' '{print $1}'
+          echo '${{ steps.file_changes.outputs.files}}'|grep 'prc'|awk -F'/' '{print $1}'
           echo '${{ steps.file_changes.outputs.files}}'|awk -F'/' '{print $1}'|awk '{print substr($1,3)}'
 
  
