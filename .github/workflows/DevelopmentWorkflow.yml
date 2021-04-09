@@ -25,7 +25,17 @@ jobs:
  
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-      - uses: trilom/file-changes-action@v1.2.3
+
+      
+      - id: file_changes
+        uses: trilom/file-changes-action@v1.2.3
+      - name: test
+        run: |
+          echo '${{ steps.file_changes.outputs.files}}'
+          echo '${{ steps.file_changes.outputs.files_modified}}'
+          echo '${{ steps.file_changes.outputs.files_added}}'
+          echo '${{ steps.file_changes.outputs.files_removed}}'
+
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
